@@ -1,6 +1,13 @@
 const Discord = require("discord.js");
 const fetch = require("node-fetch");
+const express = require("express");
 require("dotenv").config();
+
+const app = express();
+
+app.get("/", (req, res) => {
+	res.send("Yeezy Bot");
+});
 
 const client = new Discord.Client();
 
@@ -27,3 +34,5 @@ client.on("ready", function() {
 });
 
 client.login(process.env.BOT_TOKEN);
+
+app.listen(process.env.PORT || 5000);
