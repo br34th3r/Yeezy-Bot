@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
-const config = require("./config.json");
 const fetch = require("node-fetch");
+require("dotenv").config();
 
 const client = new Discord.Client();
 
@@ -9,7 +9,7 @@ const prefix = "!";
 function pullKanye() {
 	fetch("https://api.kanye.rest/", { method: "GET" })
 		.then(res => res.json())
-		.then(json => client.channels.cache.get("774394228343439433").send(json.quote))
+		.then(json => client.channels.cache.get(process.env.CHANNEL_ID).send(json.quote))
 		.catch(err => console.log(err))
 }
 
@@ -26,4 +26,4 @@ client.on("ready", function() {
 	tellEmKanye(millisInADay);
 });
 
-client.login(config.BOT_TOKEN);
+client.login(process.env.BOT_TOKEN);
